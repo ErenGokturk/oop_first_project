@@ -37,5 +37,16 @@ namespace oop_first_project.Controllers
             var value=context.Products.Where(x=>x.Id == id).FirstOrDefault();
             return View(value);
         }
+        [HttpPost] 
+        public IActionResult UpdateProduct(Product p)
+        {
+            var value = context.Products.Where(x => x.Id == p.Id).FirstOrDefault();
+            value.Name= p.Name;
+            value.Price= p.Price;
+            value.stock = p.stock;
+            context.SaveChanges();  
+            return RedirectToAction("Index");
+        }
+            
     }
 }
